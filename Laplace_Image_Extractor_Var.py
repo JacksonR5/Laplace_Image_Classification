@@ -36,7 +36,7 @@ def high_pass_mask(shape, cutoff):
 def band_pass_mask(shape, low_cutoff, high_cutoff):
     return low_pass_mask(shape, high_cutoff) - low_pass_mask(shape, low_cutoff)
 
-# Função para extrair características usando transformada de Fourier
+# Função para extrair características usando transformada de Fourier*/Laplace
 def extract_features(image_path):
     img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
     fft_result = np.fft.fft2(img)
