@@ -188,3 +188,48 @@ data = pd.DataFrame({
 
 # Salvando os dados em um arquivo CSV
 data.to_csv('Art_SensoreR_20.csv', index=True)
+
+
+########################### Resumo deste código
+
+Funções de Máscaras Filtro:
+
+    low_pass_mask: Cria uma máscara passa-baixa para a Transformada de Fourier. A máscara permite que frequências mais baixas sejam mantidas enquanto filtra frequências mais altas.
+    O parâmetro cutoff define o tamanho do filtro, e as frequências abaixo deste valor são mantidas.
+
+    high_pass_mask: Cria uma máscara passa-alta. Essa função utiliza a máscara passa-baixa e a inverte para reter apenas frequências mais altas.
+
+    band_pass_mask: Cria uma máscara passa-faixa que retém frequências entre dois valores de corte, low_cutoff e high_cutoff. Isso permite isolar uma faixa específica de frequências.
+    Função de Extração de Características:
+
+    extract_features(image_path): Lê uma imagem em escala de cinza e calcula sua Transformada de Fourier (FT), que decompõe a imagem em suas componentes de frequência.
+    
+    Espectro de Frequência: A magnitude da FT é calculada para representar o espectro de frequência da imagem.
+    
+    Estatísticas do Espectro: São extraídas características como média, desvio padrão, frequência máxima, energia total e entropia do espectro de frequência.
+
+Aplicação de Filtros: As máscaras passa-baixa, passa-alta e passa-faixa são aplicadas ao espectro de frequência, e a soma das frequências filtradas é calculada.
+    
+Características Estatísticas: O coeficiente de curtose e a assimetria (skewness) são calculados a partir do espectro para descrever sua distribuição.
+Retorno:
+
+A função retorna 10 características extraídas da imagem: média, desvio padrão, frequência máxima, energia total, entropia, valores dos filtros, curtose e assimetria.
+Diretórios de Imagens:
+
+Define variáveis para armazenar os diretórios de diferentes classes de imagens. No código, cada diretório (de dir_1 a dir_20) contém as imagens correspondentes a uma classe específica.
+Listagem de Imagens:
+
+Para cada classe de imagem, é gerada uma lista contendo os caminhos completos de cada arquivo de imagem em cada diretório.
+Extração de Características para Todas as Imagens:
+
+Para cada imagem da lista de diretórios, a função extract_features() é chamada para calcular as características. O resultado é armazenado em uma lista.
+Criação de DataFrame:
+
+Um DataFrame do pandas é criado para organizar as características extraídas. Cada linha representa uma imagem e as colunas contêm as características calculadas.
+    
+A coluna class indica a classe da imagem (de 1 a 20), baseada no diretório da qual a imagem foi extraída.
+Salvamento dos Dados:
+
+Os dados organizados no DataFrame são salvos em um arquivo CSV chamado Art_SensoreR_20.csv. Esse arquivo pode ser usado para treinar classificadores de aprendizado de máquina.
+Essa estrutura extrai características da frequência de imagens, que são posteriormente usadas para modelagem com classificadores.
+O código se concentra na preparação de dados e na extração de características que capturam padrões frequenciais, preparando o terreno para uma possível classificação supervisionada.
